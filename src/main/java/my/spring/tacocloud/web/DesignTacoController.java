@@ -3,15 +3,15 @@ package my.spring.tacocloud.web;
 import lombok.extern.slf4j.Slf4j;
 import my.spring.tacocloud.Ingredient;
 import my.spring.tacocloud.Ingredient.Type;
+import my.spring.tacocloud.Order;
 import my.spring.tacocloud.Taco;
 import my.spring.tacocloud.data.IngredientRepository;
+import my.spring.tacocloud.data.TacoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -19,21 +19,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
+@SessionAttributes("order")
 @RequestMapping("/design")
 @Controller
 public class DesignTacoController {
 
-    private final IngredientRepository ingredientRepository;
+    private final IngredientRepository ingredientRepo;
+    private final TacoRepository tacoRepo;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepository) {
-        this.ingredientRepository = ingredientRepository;
+    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo) {
+        this.ingredientRepo = ingredientRepo;
+        this.tacoRepo = tacoRepo;
     }
 
     @GetMapping
     public String showDesignForm(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredientRepository.findAll().forEach(i -> ingredients.add(i));
+        ingredientRepo.findAll().forEach(i -> ingredients.add(i));
 
         Type[] types = Ingredient.Type.values();
         for (Type type : types) {
@@ -51,13 +54,25 @@ public class DesignTacoController {
                 .collect(Collectors.toList());
     }
 
+    @ModelAttribute(name = "order")
+    public Order order() {
+        return new Order();
+    }
+
+    @ModelAttribute(name = "taco")
+    public Taco taco() {
+        return new Taco();
+    }
+
     @PostMapping
-    public String processDesign(@Valid Taco design, Errors errors) {
+    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order) {
         if (errors.hasErrors()) {
             return "design";
         }
-
         log.info("processing design: " + design);
+
+        Taco saved = tacoRepo.save(design);
+        order.addDesign(saved);
 
         return "redirect:/orders/current";
     }

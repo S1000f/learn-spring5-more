@@ -11,7 +11,13 @@
     <form method="post" th:action="@{/orders}" th:object="${order}">
         <h1>Order your taco creations!</h1>
 
-        <a th:href="@{/design.html}" id="author">Design your taco</a><br/>
+        <a th:href="@{/design}" id="author">Design another taco</a><br/>
+
+        <ul>
+            <li th:each="taco : ${order.tacos}">
+                <span th:text="${taco.name}">taco name</span>
+            </li>
+        </ul>
 
         <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
