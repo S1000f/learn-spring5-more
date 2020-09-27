@@ -8,11 +8,11 @@
 </head>
 <body>
     <h1>Design Your Taco</h1>
-
-    <form method="post" th:object="${taco}">
-        <span class="validationError"
-              th:if="${#fields.hasErrors('ingredients')}"
-              th:errors="*{ingredients}">Ingredient Error</span>
+    <h2>Feeling hungry, <span th:text="${user.fullname}">NAME</span>?</h2>
+    <form method="post" th:object="${taco}" th:action="@{/design}" id="tacoForm">
+        <span class="validationError" th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}">
+            Ingredient Error
+        </span>
 
         <div class="grid">
             <div class="ingredient-group" id="wraps">
@@ -64,6 +64,9 @@
                 th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span><br/>
             <button>Submit your taco</button>
         </div>
+    </form>
+    <form method="post" th:action="@{/logout}" id="logout">
+        <input type="submit" value="Logout"/>
     </form>
 </body>
 </html>

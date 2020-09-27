@@ -1,3 +1,5 @@
+-- noinspection SqlResolveForFile
+
 delete from Taco_Order_Tacos;
 delete from Taco_Ingredients;
 delete from Taco;

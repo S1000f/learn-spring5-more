@@ -1,0 +1,25 @@
+dn: ou=groups,dc=tacocloud,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=tacocloud,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: uid=tacocloud,ou=people,dc=tacocloud,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationPerson
+objectclass: interOrgPerson
+cn: DH KIM
+sn: KIM
+uid: user1
+userPassword: password1
+
+dn: cn=USER,ou=groups,dc=tacocloud,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: USER
+member: uid=user1,ou=people,dc=tacocloud,dc=com

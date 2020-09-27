@@ -24,8 +24,8 @@ public class TacoCloudApplication {
             repository.save(new Ingredient("LETC", "Lettuce", Ingredient.Type.VEGGIES));
             repository.save(new Ingredient("CHED", "Cheddar", Ingredient.Type.CHEESE));
             repository.save(new Ingredient("JACK", "Monterrey Jack", Ingredient.Type.CHEESE));
-            repository.save(new Ingredient("SLSA", "Salsa", Ingredient.Type.WRAP));
-            repository.save(new Ingredient("SRCR", "Sour Cream", Ingredient.Type.WRAP));
+            repository.save(new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE));
+            repository.save(new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE));
         };
     }
 
