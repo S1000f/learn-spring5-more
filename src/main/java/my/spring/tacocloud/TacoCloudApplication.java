@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 public class TacoCloudApplication {
@@ -13,6 +14,10 @@ public class TacoCloudApplication {
         SpringApplication.run(TacoCloudApplication.class, args);
     }
 
+    /* testprofile 프로파일이 아닐때만 생성된다.
+    * 즉, 프로파일이 testprofile 로 변경되면 이 빈 객체는 생성되지 않는다.
+    * */
+    @Profile("!testprofile")
     @Bean
     public CommandLineRunner dataLoader(IngredientRepository repository) {
         return args -> {
