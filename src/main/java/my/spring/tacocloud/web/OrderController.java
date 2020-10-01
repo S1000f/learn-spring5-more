@@ -5,7 +5,6 @@ import my.spring.tacocloud.Order;
 import my.spring.tacocloud.User;
 import my.spring.tacocloud.data.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

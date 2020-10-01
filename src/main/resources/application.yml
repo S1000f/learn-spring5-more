@@ -2,12 +2,16 @@ taco:
   orders:
     page-size: 20
 
+# Spring data rest 의 구성 설정
+spring:
+  data:
+    rest:
+      base-path: /api
 ---
 # 아래의 구성설정은 testprofile 프로파일이 활성화 될 때 사용되는 설정들이다.
 # 프로파일 활성화 방법
 # 환경변수 내보내기(리눅스): export SPRING_PROFILES_ACTIVE=testprofile
 # 명령행 인자로 전달: java -jar taco-cloud.jar --spring.profiles.active=testprofile
-
 spring:
   profiles:
     testprofile

@@ -33,20 +33,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/design", "/orders")
-                .access("hasRole('ROLE_USER')")
-                .antMatchers("/", "/**")
-                .permitAll()
+                .antMatchers("/design", "/orders").access("hasRole('ROLE_USER')")
+                .antMatchers("/", "/**").permitAll()
                 .and()
-                .formLogin()
-                .loginPage("/login")
+                .formLogin().loginPage("/login")
                 .passwordParameter("password") // 기본값 password 를 사용하지 않을경우 지정
                 .defaultSuccessUrl("/design") // 로그인 성공시 자동 이동을 루트경로가 아니라 특정 지점을 지정가능
                 .and()
-                .logout()
-                .logoutSuccessUrl("/")
+                .logout().logoutSuccessUrl("/")
                 .and()
-                .csrf();
+                /* 스프링부트 내장 H2 을 사용하기 위해서 csrf, x-frame-options 을 해제하고
+                * /h2-console 경로의 모든 접근을 허용시킨다. */
+                .csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/h2-console/**").permitAll();
     }
 
     @Override

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/* JdbcTemplate 을 다시 사용하려면, 각 리포지터리 클래스가 각자의 인터페이스를 구현하도록 한다.
+* 그리고 그 인터페이스는 Spring Data 인터페이스를 확장하지 않도록 한다.
+* */
 @Repository
 public class JdbcIngredientRepository {
 
