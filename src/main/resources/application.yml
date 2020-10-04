@@ -7,6 +7,14 @@ spring:
   data:
     rest:
       base-path: /api
+
+# Jms
+  jms:
+    template:
+      default-destination: tacocloud.order.queue
+
+
+
 ---
 # 아래의 구성설정은 testprofile 프로파일이 활성화 될 때 사용되는 설정들이다.
 # 프로파일 활성화 방법
