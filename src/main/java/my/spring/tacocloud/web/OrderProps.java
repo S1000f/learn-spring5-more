@@ -21,5 +21,6 @@ public class OrderProps {
     * taco.orders.pageSize
     * */
     @Range(min = 0, max = 25, message = "must be between 5 and 25")
-    private int pageSize = 20;
+    private int pageSize;
+
 }

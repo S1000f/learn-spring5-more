@@ -1,4 +1,4 @@
-package my.spring.tacocloud.messaging.jms.listener;
+package my.spring.tacocloud.messaging.jms;
 
 import lombok.extern.slf4j.Slf4j;
 import my.spring.tacocloud.Order;

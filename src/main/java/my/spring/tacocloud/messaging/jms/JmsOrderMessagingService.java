@@ -1,6 +1,7 @@
 package my.spring.tacocloud.messaging.jms;
 
 import my.spring.tacocloud.Order;
+import my.spring.tacocloud.messaging.OrderMessagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class JmsOrderMessagingService implements OrderMessagingService {
     }
 
     public void sendOrderByDestination(Order order) {
-        jmsTemplate.send(orderQueue, s -> s.createObjectMessage(order));
+        jmsTemplate.send(orderQueue, session -> session.createObjectMessage(order));
     }
 
     public void sendOrderWithConverter(Order order) {

@@ -1,4 +1,4 @@
-package my.spring.tacocloud.messaging.jms;
+package my.spring.tacocloud.messaging;
 
 import my.spring.tacocloud.Order;
 

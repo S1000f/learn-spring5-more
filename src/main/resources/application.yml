@@ -13,6 +13,18 @@ spring:
     template:
       default-destination: tacocloud.order.queue
 
+# RabbitMQ
+  rabbitmq:
+    template:
+      exchange: tacocloud.order.rabbit
+      routing-key: kitchens.central
+      receive-timeout: 3000
+
+# kafka
+#  kafka:
+#    bootstrap-servers:
+#    template:
+#      default-topic: tacocloud.orders.topic
 
 
 ---

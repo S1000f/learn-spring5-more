@@ -1,6 +1,7 @@
 package my.spring.tacocloud.messaging.jms;
 
 import my.spring.tacocloud.Order;
+import my.spring.tacocloud.messaging.OrderReceiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MessageConverter;
