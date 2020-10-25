@@ -20,6 +20,14 @@ spring:
       routing-key: kitchens.central
       receive-timeout: 3000
 
+tacocloud:
+  email:
+    host: imap.tacocloud.com
+    mailbox: INBOX
+    username: taco-in-flow
+    password: 3333
+    pollrate: 10000
+
 # kafka
 #  kafka:
 #    bootstrap-servers:

@@ -4,6 +4,31 @@
       "name": "taco.orders.page-size",
       "type": "int",
       "description": "Sets the maximum number of orders to display in a list."
+    },
+    {
+      "name": "tacocloud.email.host",
+      "type": "java.lang.String",
+      "description": "Description for tacocloud.email.host."
+    },
+    {
+      "name": "tacocloud.email.mailbox",
+      "type": "java.lang.String",
+      "description": "Description for tacocloud.email.mailbox."
+    },
+    {
+      "name": "tacocloud.email.username",
+      "type": "java.lang.String",
+      "description": "Description for tacocloud.email.username."
+    },
+    {
+      "name": "tacocloud.email.password",
+      "type": "java.lang.String",
+      "description": "Description for tacocloud.email.password."
+    },
+    {
+      "name": "tacocloud.email.pollrate",
+      "type": "java.lang.String",
+      "description": "Description for tacocloud.email.pollrate."
     }
   ]
 }
