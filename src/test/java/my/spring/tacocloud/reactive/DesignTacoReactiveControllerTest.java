@@ -9,10 +9,12 @@ import java.util.UUID;
 import my.spring.tacocloud.Ingredient;
 import my.spring.tacocloud.Ingredient.Type;
 import my.spring.tacocloud.Taco;
-import my.spring.tacocloud.data.TacoRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public class DesignTacoReactiveControllerTest {
 
@@ -25,6 +27,47 @@ public class DesignTacoReactiveControllerTest {
 
     TacoReactiveRepo tacoRepository = Mockito.mock(TacoReactiveRepo.class);
     when(tacoRepository.findAll()).thenReturn(tacoFlux);
+    
+    WebTestClient testClient = WebTestClient.bindToController(new DesignTacoReactiveController(tacoRepository))
+        .build();
+
+    testClient.get().uri("/webflux/design/recent")
+        .exchange()
+        .expectStatus().isOk()
+        .expectBody()
+        .jsonPath("$").isArray()
+        .jsonPath("$").isNotEmpty()
+        .jsonPath("$[0].name").isEqualTo("Taco 1");
+
+    testClient.get().uri("/webflux/design/recent")
+        .accept(MediaType.APPLICATION_JSON)
+        .exchange()
+        .expectStatus().isOk()
+        .expectBodyList(Taco.class)
+        .contains(tacos.toArray(new Taco[] {}));
+  }
+
+  @Test
+  public void saveTacoTest() {
+    TacoReactiveRepo tacoReactiveRepo = Mockito.mock(TacoReactiveRepo.class);
+    Mono<Taco> unsaved = Mono.just(testTaco(null));
+    Taco saved = testTaco(null);
+    saved.setId(1L);
+    Mono<Taco> savedTacoMono = Mono.just(saved);
+
+    when(tacoReactiveRepo.save(any())).thenReturn(savedTacoMono);
+
+    WebTestClient testClient = WebTestClient.bindToController(new DesignTacoReactiveController(tacoReactiveRepo))
+        .build();
+
+    testClient.post()
+        .uri("/webflux/design")
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(unsaved, Taco.class)
+        .exchange()
+        .expectStatus().isOk()
+        .expectBody(Taco.class);
+
   }
 
   private Taco testTaco(Long number) {

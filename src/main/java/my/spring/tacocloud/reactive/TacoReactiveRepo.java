@@ -6,4 +6,6 @@ import reactor.core.publisher.Flux;
 public interface TacoReactiveRepo {
 
   Flux<Taco> findAll();
+
+  <T> T save(T t);
 }
