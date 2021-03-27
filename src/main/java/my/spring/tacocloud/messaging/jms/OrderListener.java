@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderListener {
 
-    @JmsListener(destination = "tacocloud.order.queue")
+//    @JmsListener(destination = "tacocloud.order.queue")
     public void receiveOrder(Order order) {
         // FIXME: business logic here using received message...
         log.info(order.getTacos().toString());

@@ -19,14 +19,15 @@ spring:
       exchange: tacocloud.order.rabbit
       routing-key: kitchens.central
       receive-timeout: 3000
+  main:
+    allow-bean-definition-overriding: true
 
-tacocloud:
-  email:
-    host: imap.tacocloud.com
-    mailbox: INBOX
-    username: taco-in-flow
-    password: 3333
-    pollrate: 10000
+#tacocloud:
+#  email:
+#    host: imap.tacocloud.com
+#    mailbox: INBOX
+#    username: taco-in-flow
+#    password: 3333
 
 # kafka
 #  kafka:
